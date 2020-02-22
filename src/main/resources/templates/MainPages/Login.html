@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/Style.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <title>Login Page</title>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="left-side">
+                        <li><a href="#">phone number : 09363529940</a></li>
+                    </ul>
+
+                </div>
+
+                <div class="col-md-6">
+                    <ul>
+                        <li><a href="">Account</a></li>
+                        <li><a href="">About US</a></li>
+                        <li><a href="">Business Plans</a></li>
+                        <li><a href="">Contact US</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="header-main">
+
+        <div class="container no-padding">
+            <div class="row col-md-12 no-padding">
+                <a class="col-md-6 logo no-padding" href=""><img src="resources/images/logo.png" alt="logo" /></a>
+                <nav class="col-md-6 no-padding">
+
+                    <ul>
+                        <li><a href="index.jsp">صفحه اصلی</a></li>
+                        <li><a href="UserPage.jsp">حساب کاربری</a>
+                            <ul>
+
+                                <li><a href="Signup.jsp">ثبت نام</a></li>
+                                <li><a href="Login.jsp">ورود به حساب</a></li>
+
+                            </ul>
+
+                        </li>
+
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+</header>
+<div class="clearfix"></div>
+
+<section>
+    <div class="sign-up-form">
+        <div class="container">
+            <div class="col-md-5 col-sm-6 align-self-md-center">
+                <div class="text-center">ورود</div>
+
+                <form th:action="@{/login}" method="post">
+                    <div><label> User Name : <input type="text" name="username"/> </label></div>
+                    <div><label> Password: <input type="password" name="password"/> </label></div>
+                    <div><input type="submit" value="Login"/></div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<div class="clearfix"></div>
+
+<footer>
+    <div class="footer">
+        <p>
+            Designed By Team3D .co
+            All Rights Reserved.
+        </p>
+    </div>
+</footer>
+
+
+</body>
+</html>

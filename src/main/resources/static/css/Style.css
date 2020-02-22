@@ -1,0 +1,263 @@
+@font-face{
+    font-family:myFont;
+
+
+}
+
+body {
+    font-size: 13px;
+    background-color:#fafafa;
+    color:#616161;
+}
+a,a:hover,a:active,a:focus,a:visited{
+    color: #616161;
+    text-decoration: none!important;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+}
+
+.no-padding{
+    padding: 0!important;
+}
+
+
+
+.header-top{
+    background:#5fb7ea;
+    display: flex;
+    align-items: flex-start;
+}
+
+.left-side{
+    float: left;
+}
+.header-top ul li{
+    float: right;
+    display: inline-block;
+}
+.header-top a{
+    padding: 10px;
+    display: block;
+    font-size: 12px;
+    text-decoration: none;
+    color: #fff;
+
+}
+.header-top ul li a:hover{
+    color: #476678;
+}
+li{
+    list-style: none;
+}
+
+ul{
+    margin: 0;
+    padding :0;
+}
+
+
+
+.header-main{
+    padding-top: 10px;
+
+}
+
+.header-main nav{
+    position: relative;
+
+}
+
+.header-main ul{
+    padding-right: 10px;
+    float: right;
+}
+
+.header-main .logo{
+    float: left;
+}
+
+
+.header-main ul li{
+    float:right;
+    display: inline-block;
+    position: relative;
+
+
+
+
+}
+
+
+.header-main ul li a{
+    display: block;
+    padding: 10px 20px;
+    font-size: 20px;
+
+}
+
+.header-main ul li ul{
+    top:100%;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    width: 170px;
+    margin: -20px 0 0;
+    padding: 0;
+    background: white;
+    transition: all .2s ease-in-out;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    box-shadow: -1px 2px 3px rgba(0,0,0,.2);
+    z-index: 12;
+}
+
+.header-main ul li:hover ul{
+    opacity: 1;
+    visibility: visible;
+    margin: 0;
+}
+
+.header-main ul li ul li{
+
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: right;
+}
+
+.header-main ul li ul li a:hover{
+
+    background: #ff688f ;
+    color: #fff;
+
+
+}
+
+
+.logo img{
+    width: 300px;
+    height: 80px;
+}
+
+
+
+
+
+.footer{
+    width: 100%;
+    float: left;
+    padding: 20px 0;
+    background: #5fb7ea;
+    color: #fff;
+    text-align: center;
+
+}
+.footer p{
+    direction: ltr;
+    margin: 0;
+}
+
+
+.search-form{
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: stretch;
+    align-content: stretch;
+    width: 100%;
+    height: auto;
+    margin-bottom: 5%;
+}
+
+.search-form label{
+    text-align: right;
+    direction: rtl;
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+input[type="text"],[type="password"],[type="email"]{
+    margin-top: 2px;
+    text-align: center;
+    height: 40px!important;
+
+}
+
+.add-drug-form{
+    margin-right: 35%;
+}
+
+.add-drug-form button[type="submit"]{
+    margin-left: 40%;
+    margin-top: 2px;
+}
+
+.add-drug-form input[type="date"]{
+    margin-top: 2px;
+    text-align: center;
+    height: 40px!important;
+
+}
+
+.add-drug-form label{
+    direction: rtl;
+}
+
+.alert-position{
+    width: auto;
+    height: 70px;
+    float: right;
+    margin: 5px 5px 5px 5px;
+    z-index: 6!important;
+    display: flex;
+
+}
+
+.search-form input[type="text"]{
+    width: 20%;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.search-form input[type="date"]{
+    width: 20%!important;
+    margin-right: 10px!important;
+    margin-left: 10px!important;
+}
+
+
+.table{
+    margin-right: 35%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    direction: rtl;
+    text-align: center;
+
+}
+
+td, th {
+    border: 1px solid #dddddd;
+
+    padding: 8px;
+
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.reserve-form{
+    display: block;
+    width: 300px;
+    height: auto;
+    border: 1px solid black;
+}
+
