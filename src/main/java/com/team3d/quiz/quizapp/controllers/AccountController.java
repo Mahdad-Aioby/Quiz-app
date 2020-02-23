@@ -34,7 +34,7 @@ public class AccountController {
     private String signUpUser(@ModelAttribute Account account){
         accountService.saveAccount(account);
 
-        return "login";
+        return "/login";
     }
 
     @GetMapping("/login")
@@ -42,4 +42,9 @@ public class AccountController {
         return "MainPages/Login";
     }
 
+
+    @GetMapping("/success")
+    public String getSuccessPage() {
+        return "MainPages/Success";
+    }
 }

@@ -1,6 +1,7 @@
 package com.team3d.quiz.quizapp.entities;
 
 import jdk.jfr.Enabled;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import java.util.Set;
 @Table
 
 
-public class Authority {
+public class Authority implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +20,9 @@ public class Authority {
 
     @ManyToMany(mappedBy = "authorities")
     private Set<Role> roles;
+
+    public Authority(String authority) {
+    }
 
     public Authority() {
     }
