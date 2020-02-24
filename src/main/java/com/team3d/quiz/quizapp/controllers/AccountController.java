@@ -47,4 +47,9 @@ public class AccountController {
     public String getSuccessPage() {
         return "MainPages/Success";
     }
+
+    @GetMapping("/accessDenied")
+    public String getAccessDeniedPage() {
+        return "MainPages/AccessDenied";
+    }
 }

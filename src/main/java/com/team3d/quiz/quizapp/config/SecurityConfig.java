@@ -4,6 +4,7 @@ package com.team3d.quiz.quizapp.config;
 import com.team3d.quiz.quizapp.AuthServiceWithUserDetails.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -12,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true,securedEnabled = true)
@@ -57,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/*.js","/*.css").permitAll()
                 .antMatchers("/static/css/**", "/static/js/**").permitAll()
+                .antMatchers(HttpMethod.GET).permitAll()
+
                 .antMatchers("/Students/**").hasAnyRole("STUDENT")
                 .antMatchers("/Teachers/**").hasAnyRole("TEACHER")
 
@@ -65,9 +70,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .successForwardUrl("/success")
-                .permitAll();
+                .successHandler(myAuthenticationSuccessHandler())
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedPage("/accessDenied");
+
     }
+
 
 
     @Bean
@@ -80,4 +89,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder(){return new BCryptPasswordEncoder(); }
+
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new MyAuthSuccessHandler();
+    }
+
 }
