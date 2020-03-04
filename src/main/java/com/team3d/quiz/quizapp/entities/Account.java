@@ -12,6 +12,8 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String username;
     private String password;
     private boolean isActive;
@@ -26,6 +28,8 @@ public class Account {
     private List<Role> roles;
     @Transient
     private Long requestedRole;
+
+
 
     public Long getRequestedRole() {
         return requestedRole;
@@ -85,4 +89,6 @@ public class Account {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
+
+
 }

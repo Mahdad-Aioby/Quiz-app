@@ -55,8 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        and everyone is allowed to view it.
 
         http
+                .csrf().disable()
             .authorizeRequests()
-                .antMatchers("/MainPages/**","/signup").permitAll()
+                .antMatchers("/MainPages/**","/signup","/index").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/*.js","/*.css").permitAll()
                 .antMatchers("/static/css/**", "/static/js/**").permitAll()

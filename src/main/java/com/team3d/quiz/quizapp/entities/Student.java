@@ -11,6 +11,7 @@ import javax.persistence.Table;
 @Table
 public class Student extends Person {
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Account account;
+
+
+
 }

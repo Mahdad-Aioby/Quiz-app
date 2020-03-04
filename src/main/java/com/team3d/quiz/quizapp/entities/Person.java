@@ -3,7 +3,6 @@ package com.team3d.quiz.quizapp.entities;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-
 @MappedSuperclass
 public class Person {
     @Id
@@ -15,7 +14,16 @@ public class Person {
     private String email;
     private String phonenumber;
 
+    @OneToOne
+    private Account account;
 
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
 
     public Person() {
     }

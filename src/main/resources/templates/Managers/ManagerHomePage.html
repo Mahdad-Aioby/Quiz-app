@@ -2,9 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
     <link type="text/css" rel="stylesheet" href="css/Manager.css">
+
+
     <title>Manage Home Page</title>
+
 </head>
 
 
@@ -18,9 +23,9 @@
         </div>
     </div>
     <div class="app-side-bar">
-        <div class="menu">بخش کاربران</div>
+        <div id="menu" class="menu">بخش کاربران</div>
         <ul class="menu-ul">
-            <li class="menu-li">تایید کاربران</li>
+            <li class="menu-li" onclick="loadPage('/listAccounts')" >تایید کاربر</li>
 
         </ul>
 
@@ -30,11 +35,11 @@
     </div>
 
 </div>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/ManagerHomePage.js"></script>
 
-<script type="javascript" src="js/jquery-3.4.1.min.js"></script>
-<script type="javascript" src="js/popper.min.js"></script>
-<script type="javascript" src="js/bootstrap.js.min.js"></script>
-<script type="javascript" src="js/ManagerHomePage.js"></script>
 
 </body>
 

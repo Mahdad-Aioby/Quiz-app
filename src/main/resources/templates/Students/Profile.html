@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+    <form th:action="@{/SaveProfile}" th:object="${student}" method="post">
+        <input type="text" placeholder="firstname" name="firstname" th:field="*{firstname}"/>
+        <input type="text" placeholder="lastname" name="lastname" th:field="*{lastname}"/>
+
+        <input type="text" placeholder="nationalcode" name="nationalcode" th:field="*{nationalcode}"/>
+
+        <input type="text" placeholder="email" name="email" th:field="*{email}"/>
+        <input type="text" placeholder="phonenumber" name="phonenumber" th:field="*{phonenumber}"/>
+        <input type="hidden" th:field="*{account}" name="account" th:value="${account}"/>
+        <button type="submit" value="create profile"></button>
+    </form>
+
+</body>
+</html>

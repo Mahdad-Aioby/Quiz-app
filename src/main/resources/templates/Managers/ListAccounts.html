@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<table class="table table-light" id="tbl-accounts" >
+    <tr>
+        <th>#</th>
+        <th>نام کاربری</th>
+        <th>نقش</th>
+        <th>فعالسازی</th>
+
+
+    </tr>
+    <tr th:each="account, stataccount: *{accounts}">
+        <td th:text="*{accounts[__${stataccount.index}__].id}"></td>
+        <td th:text="*{accounts[__${stataccount.index}__].username}"></td>
+        <td th:text="*{accounts[__${stataccount.index}__].roles[0].role}"></td>
+<!--        <tr th:each="role,statsrole : *{account.roles}">-->
+
+<!--            <td th:text="*{accounts[__${stataccount.index}__].roles[__${statsrole.index}__].role}"></td>-->
+
+<!--        </tr>-->
+        <td><label>
+            <input type="checkbox" th:name="active" th:value="${account.id}" />
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        </label>
+        </td>
+
+    </tr>
+
+
+</table>
+
+    <form>
+    <button type="submit" onclick="GetSelected()">Active all</button>
+    </form>
+
+<script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js.min.js"></script>
+<script type="text/javascript" src="js/ManagerHomePage.js"></script>
+
+
+
+</body>
+</html>

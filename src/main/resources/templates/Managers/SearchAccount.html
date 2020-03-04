@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>search account</title>
+</head>
+<body>
+    <div>
+        <form method="post" th:action="@{/searchAccount}" th:object="${student}">
+
+            <input type="text" th:field="*{firstname}"/>
+            <input type="submit" value="search"/>
+        </form>
+
+    </div>
+
+    <div>
+        <table>
+            <thead>
+            <tr>
+                <th>name</th>
+                <th>family</th>
+                <th>nationalcode</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="student, statstudent: *{students}">
+
+                <td th:text="*{students[__${statstudent.index}__].firstname}"></td>
+                <td th:text="*{students[__${statstudent.index}__].lastname}"></td>
+                <td th:text="*{students[__${statstudent.index}__].nationalcode}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
