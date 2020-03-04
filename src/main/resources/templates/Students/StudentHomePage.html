@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,8 +9,12 @@
 
 <a href="/StudentCreateProfile">profile</a>
 
+<div sec:authorize="isAuthenticated()">
+    Authenticated as <span sec:authentication="name"></span>
 
-username: <div th:text="${username}"></div>
+
+
+</div>
 
 </body>
 </html>

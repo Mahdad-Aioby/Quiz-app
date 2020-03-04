@@ -3,7 +3,9 @@ package com.team3d.quiz.quizapp.entities;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-@MappedSuperclass
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

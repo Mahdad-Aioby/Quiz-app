@@ -6,7 +6,7 @@
 </head>
 <body>
 
-    <form th:action="@{/SaveProfile}" th:object="${student}" method="post">
+    <form th:action="@{/SaveProfile}" th:object="${person}" method="post">
         <input type="text" placeholder="firstname" name="firstname" th:field="*{firstname}"/>
         <input type="text" placeholder="lastname" name="lastname" th:field="*{lastname}"/>
 
@@ -14,7 +14,7 @@
 
         <input type="text" placeholder="email" name="email" th:field="*{email}"/>
         <input type="text" placeholder="phonenumber" name="phonenumber" th:field="*{phonenumber}"/>
-        <input type="hidden" th:field="*{account}" name="account" th:value="${account}"/>
+<!--        <input type="hidden" th:field="*{account}" name="account" th:value="${account}"/>-->
         <button type="submit" value="create profile"></button>
     </form>
 

@@ -53,7 +53,5 @@ public class StudentService {
 
     }
 
-    public void saveProfile(Student student){
-        studentRepository.save(student);
-    }
+
 }
