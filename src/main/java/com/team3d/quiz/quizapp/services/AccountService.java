@@ -2,6 +2,7 @@ package com.team3d.quiz.quizapp.services;
 
 import com.team3d.quiz.quizapp.entities.Account;
 import com.team3d.quiz.quizapp.entities.Role;
+import com.team3d.quiz.quizapp.entities.dto.AccountDTO;
 import com.team3d.quiz.quizapp.repositories.AccountRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,8 +38,12 @@ public class AccountService {
         return accountRepository.getAccountByUsername(username);
     }
 
-    public List<Account> getAccountList(){
-        return accountRepository.findAll().stream().filter(account -> account.isActive()==false).collect(Collectors.toList());
+    public List<AccountDTO> getAccountList(){
+
+        List<AccountDTO> accounts= accountRepository.findAll().stream().map(account -> new AccountDTO(account.getId(),account.getUsername(),account.getPassword(),account.isActive(),account.isAccountNonExpired(),account.getRoles())).filter(accountDTO -> accountDTO.isActive()==false).collect(Collectors.toList());
+
+
+        return accounts;
     }
 
     public void activeAllById(List<Long> accounts){

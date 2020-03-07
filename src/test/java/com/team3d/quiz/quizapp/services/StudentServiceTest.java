@@ -6,12 +6,5 @@ import org.junit.jupiter.api.Test;
 
 class StudentServiceTest {
 
-    @Test
-    void students() {
-        Student fetchManagersCriteria = new Student();
-        fetchManagersCriteria.setFirstname("mahdad");
 
-        StudentService employeeService = new StudentService();
-        employeeService.students(fetchManagersCriteria);
-    }
 }

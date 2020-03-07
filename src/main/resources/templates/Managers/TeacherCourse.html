@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="datepicker/css/persianDatepicker-default.css">
+
+    <title>Title</title>
+</head>
+<body>
+
+
+<button type="button" class="btn btn-primary" onclick="getAllTeachersByManager()">Show Teachers</button>
+
+<table class="table table-striped table-hover" style="padding-top: 10px">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">نام استاد</th>
+        <th scope="col">نام خانوادگی</th>
+        <th scope="col">افزودن</th>
+    </tr>
+    </thead>
+    <tbody id="table-body">
+
+    </tbody>
+</table>
+
+
+
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+<script>
+    function getAllTeachersByManager() {
+        $.ajax({
+            url: "http://localhost:8080/Teachers/get-all-teachers",
+            type: "POST",
+            success: function (data, textStatus, jQxhr) {
+                //console.table(data.accountDtoList);
+                prepareCourseTable(data);
+            },
+            error: function (errorMessage) {
+                alert(errorMessage)
+            }
+        });
+    }
+    function prepareCourseTable(data) {
+        globaldata = data;
+        let content = '';
+        for (let i = 0; i < data.length; i++) {
+            content += "<tr>";
+            content += "<th scope='row'>" + data[i].id + "</th>";
+            content += "<td >" + data[i].firstname + "</td>";
+            content += "<td >" + data[i].lastname + "</td>";
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showAddTeacherModal(" + i + ")'>add Teacher</button>" +
+                "</td>";
+            content += "</tr>";
+        }
+        $('#table-body').html(content);
+    }
+
+</script>
+</body>
+</html>

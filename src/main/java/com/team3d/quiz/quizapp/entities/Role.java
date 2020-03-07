@@ -1,5 +1,6 @@
 package com.team3d.quiz.quizapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class Role {
     private String role;
 
     @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
     private List<Account> accounts;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

@@ -1,5 +1,6 @@
 package com.team3d.quiz.quizapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -17,7 +18,21 @@ public class Person {
     private String phonenumber;
 
     @OneToOne
+    @JsonIgnore
     private Account account;
+    @Transient
+    private String type;
+
+    public Person() {
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 
     public Account getAccount() {
         return account;
@@ -25,9 +40,6 @@ public class Person {
 
     public void setAccount(Account account) {
         this.account = account;
-    }
-
-    public Person() {
     }
 
     public Long getId() {

@@ -3,6 +3,7 @@ package com.team3d.quiz.quizapp.controllers;
 import com.team3d.quiz.quizapp.entities.Account;
 import com.team3d.quiz.quizapp.entities.Person;
 import com.team3d.quiz.quizapp.entities.Student;
+import com.team3d.quiz.quizapp.entities.Teacher;
 import com.team3d.quiz.quizapp.services.AccountService;
 import com.team3d.quiz.quizapp.services.Person.PersonService;
 import com.team3d.quiz.quizapp.services.Student.StudentService;
@@ -40,8 +41,10 @@ public class ProfileController {
     @PostMapping("/SaveProfile")
     public String saveStudentProfile(@ModelAttribute Person person, Principal principal){
         Account account = accountService.getAccountByUserName(principal.getName());
+
         account.setPerson(person);
         person.setAccount(account);
+
         personService.saveProfile(person);
         return "Students/StudentHomePage";
     }

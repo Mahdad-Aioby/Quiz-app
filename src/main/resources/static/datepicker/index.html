@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery PERSIAN DatePicker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link type="text/css" rel="stylesheet" href="css/persianDatepicker-default.css" />
+        <style type="text/css">
+            *{margin:0; padding:0}
+            body{
+                padding: 10px 30px; 
+                font-family: Helvetica;
+            }
+            .dl{
+                padding: 20px;
+                text-align:center;
+				margin-bottom: 20px;
+            }
+			.dl img{
+                opacity: .6;
+            }
+			.dl img:hover{
+                opacity: 1;
+            }
+            a{color: #037;}
+            
+            input{
+                border: 1px solid #339;
+                padding: 3px;
+                font:bold 12px sans-serif;
+				width: 90px;
+            }
+            h1{color: #222;}
+            h3{color: #444;}
+            h4{color:#666;}
+            hr{color: #888; box-shadow: 1px 1px 8px 1px #999; margin-top: 5px;margin-bottom: 5px;}
+            pre{
+                background: #f9f9f9;
+                border: 1px solid #aaa;
+                padding: 10px;
+                margin: 10px;
+            }
+			
+        </style>
+        <link type="text/css" rel="stylesheet" href="js/prism/css-javascript.css" />
+        <script type="text/javascript" src="js/prism/css-javascript.js"></script>
+        <!----------------->
+        <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+        <script type="text/javascript" src="js/persianDatepicker.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $("#simpleText, #simpleLabel").persianDatepicker();
+                $("#selectedBefore").persianDatepicker({selectedBefore:true});    
+				$("#alwaysShow").persianDatepicker({alwaysShow:true});    
+				
+            });
+        </script>
+        <!----------------->
+    </head>
+    <body>
+        <h1><a href="http://mbehzadi.com/persianDatepicker" title="mbehzadi.com">PERSIAN Datepicker</a></h1>
+        <h3>www.netparadis.com</h3>
+        <hr>
+        <div class="dl">	
+			<a href="http://github.com/behzadi/persianDatepicker"><img src="http://github.com/favicon.ico" /></a>
+			<br />
+			<a href="https://netparadis.com">نت پارادیس</a>
+			
+        </div>
+		persian date: 
+            <input type="text" id="simpleText" placeholder="select date" />
+            a label : 
+            <label id="simpleLabel" style="background: #ccc; width:90px;">click me...</label> 
+			selected before: 
+            <input type="text" id="selectedBefore" placeholder="select date" />
+			 show always: 
+            <input type="text" id="alwaysShow" placeholder="select date" />
+			<br /><br />
+    </body>
+</html>
+

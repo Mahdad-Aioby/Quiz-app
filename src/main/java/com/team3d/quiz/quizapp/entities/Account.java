@@ -1,5 +1,6 @@
 package com.team3d.quiz.quizapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Account {
     }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private Person person;
 
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

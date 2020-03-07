@@ -29,5 +29,18 @@ public class ManagerController {
         return "Managers/ManagerHomePage";
     }
 
+    @GetMapping("/CourseManagerPage")
+    public String showCourseManagerPage(){
+        return "Managers/WorkOnCourses";
+
+    }
+
+    @GetMapping("/add-teacher-course")
+    public String showTeacherCoursePage(){
+        return "Managers/TeacherCourse";
+
+    }
+
+
 
 }

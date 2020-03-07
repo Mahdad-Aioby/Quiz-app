@@ -1,6 +1,7 @@
 package com.team3d.quiz.quizapp.controllers.ManagerControllers;
 
 import com.team3d.quiz.quizapp.entities.Account;
+import com.team3d.quiz.quizapp.entities.dto.AccountDTO;
 import com.team3d.quiz.quizapp.services.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,7 +27,7 @@ public class ManagerWorksOnAccountController {
     @GetMapping("/listAccounts")
     public String getAccounts(Model model){
 
-        List<Account> accounts = accountService.getAccountList();
+        List<AccountDTO> accounts = accountService.getAccountList();
         model.addAttribute("accounts",accounts);
         return "Managers/ListAccounts";
 
@@ -41,7 +42,7 @@ public class ManagerWorksOnAccountController {
             longs.add(Long.parseLong(s));
 
         accountService.activeAllById(longs);
-        return "/Managers/ListAccounts";
+        return "Managers/ListAccounts";
     }
 
 
