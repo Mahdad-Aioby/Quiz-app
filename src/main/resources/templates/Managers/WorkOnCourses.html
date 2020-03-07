@@ -77,6 +77,7 @@
         <th scope="col">افزودن استاد</th>
         <th scope="col">افزودن دانشجو</th>
         <th scope="col">جزئیات</th>
+        <th scope="col">ویرایش</th>
         <th scope="col">حذف</th>
     </tr>
     </thead>
@@ -263,6 +264,64 @@
 
 <!--end show All Courses-->
 
+<!--start edit course-->
+
+<div class="modal fade" id="courseEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ویرایش دوره</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form>
+                    <div class="form-group">
+                        <label for="title" class="col-form-label">نام دوره</label>
+                        <input type="text" class="form-control" id="edit-title">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc" class="col-form-label">توضیحات دوره</label>
+                        <input type="text" class="form-control" id="edit-desc">
+                    </div>
+                    <div class="form-group">
+                        <label for="myDate" class="col-form-label">تاریخ شروع</label>
+                        <input type="text" id="edit-myDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="myDate2" class="col-form-label">تاریخ پایان</label>
+                        <input type="text" id="edit-myDate2" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <select id="edit-status">
+                            <option value="OnGoing">در حال اجرا</option>
+                            <option value="Suspend">تعلیق شده</option>
+                            <option value="Ended">تمام شده</option>
+                        </select>
+                    </div>
+
+                </form>
+
+
+
+                <input type="text" id="courseIdForEditCourse" readonly>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="editCourse()">ویرایش</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--end edit course-->
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
@@ -341,6 +400,10 @@
                 "</td>";
 
             content += "<td >" +
+                "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showEditCourseModal(" + i + ")'>Edit</button>" +
+                "</td>";
+
+            content += "<td >" +
                 "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showDeleteCourseModal(" + i + ")'>Delete</button>" +
                 "</td>";
             content += "</tr>";
@@ -376,7 +439,6 @@
         $("#deleteCourse").modal('hide');
 
     }
-
     function showAddTeacherModal(data) {
         $("#course-id").val(globaldata[data].id);
         $("#addTeacher").modal('toggle');
@@ -424,7 +486,6 @@
 
         });
     }
-
     function showAddStudentModal(data) {
         $("#courseIdForStudent").val(globaldata[data].id);
         $("#addStudent").modal('toggle');
@@ -471,7 +532,6 @@
             }
         });
     }
-
     function showCourseDetailsModal(data) {
         $("#courseIdForShowCourse").val(globaldata[data].id);
         $("#courseDetails").modal('toggle');
@@ -523,8 +583,47 @@
         $('#student-course-table-body').html(studentContent);
     }
 
+    function showEditCourseModal(data) {
+        $("#courseIdForEditCourse").val(globaldata[data].id);
+        $("#edit-title").val(globaldata[data].courseTitle);
+        $("#edit-status").val(globaldata[data].status);
+        $("#edit-desc").val(globaldata[data].courseDesc);
+        $("#edit-myDate").val(globaldata[data].startDate);
+        $("#edit-myDate2").val(globaldata[data].endDate);
+        $("#courseEdit").modal('toggle');
+    }
+
+    function editCourse() {
+        const id = $("#courseIdForEditCourse").val();
+        const title = $("#edit-title").val();
+        const desc = $("#edit-desc").val();
+        const status = $("#edit-status").val();
+        const startDate = $("#edit-myDate").val();
+        const endDate = $("#edit-myDate2").val();
 
 
+        const Course = {
+            "id" : id,
+            "startDate": startDate,
+            "endDate": endDate,
+            "status" : status,
+            "courseTitle": title,
+            "courseDesc": desc
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/Courses/Edit",
+            data: JSON.stringify(Course),
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus) {
+
+            },
+            error: function (errorMessage) {
+                alert("some things went wrong!");
+            }
+        });
+        $("#courseEdit").modal('hide');
+    }
 </script>
 <script>
     $(document).ready(function () {
@@ -538,6 +637,8 @@
     $(function() {
         $("#myDate, #span1").persianDatepicker();
         $("#myDate2, #span1").persianDatepicker();
+        $("#edit-myDate, #span1").persianDatepicker();
+        $("#edit-myDate2, #span1").persianDatepicker();
 
     });
 </script>

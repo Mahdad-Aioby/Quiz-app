@@ -20,4 +20,6 @@ public interface CourseService {
     Optional<Course> getCourseById(Long courseId);
 
     void update(Course course);
+
+    void update(CourseDTO courseDTO);
 }

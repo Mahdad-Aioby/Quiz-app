@@ -51,4 +51,10 @@ public class ManagerWorksWithCourses {
        return course;
     }
 
+    @PostMapping("/Edit")
+    private void editCourse(@RequestBody CourseDTO courseDTO){
+        courseService.update(courseDTO);
+
+    }
+
 }

@@ -60,4 +60,20 @@ public class CourseServiceImplementation implements CourseService {
     public void update(Course course) {
         courseRepository.save(course);
     }
+
+    @Override
+    public void update(CourseDTO courseDTO) {
+        Course course = courseRepository.getOne(courseDTO.getId());
+
+        Date startDate = MyDate.changeFromJalali(courseDTO.getStartDate());
+        Date endDate = MyDate.changeFromJalali(courseDTO.getEndDate());
+
+        course.setStartDate(startDate);
+        course.setEndDate(endDate);
+        course.setCourseTitle(courseDTO.getCourseTitle());
+        course.setCourseDesc(courseDTO.getCourseDesc());
+        course.setStatus(courseDTO.getStatus());
+        course.setId(courseDTO.getId());
+        courseRepository.save(course);
+    }
 }
