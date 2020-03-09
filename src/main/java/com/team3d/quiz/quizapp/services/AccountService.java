@@ -1,7 +1,6 @@
 package com.team3d.quiz.quizapp.services;
 
-import com.team3d.quiz.quizapp.entities.Account;
-import com.team3d.quiz.quizapp.entities.Role;
+import com.team3d.quiz.quizapp.entities.*;
 import com.team3d.quiz.quizapp.entities.dto.AccountDTO;
 import com.team3d.quiz.quizapp.repositories.AccountRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,10 +23,8 @@ public class AccountService {
     }
 
     public Account saveAccount(Account account){
-
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         account.setPassword(passwordEncoder.encode(account.getPassword()));
-
         Role role = roleService.getRole(account.getRequestedRole());
         List<Role> roles = new ArrayList<Role>(){{add(role);}};
         account.setRoles(roles);

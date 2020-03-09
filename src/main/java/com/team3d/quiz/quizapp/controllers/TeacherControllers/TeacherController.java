@@ -1,6 +1,5 @@
 package com.team3d.quiz.quizapp.controllers.TeacherControllers;
 
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,12 @@ public class TeacherController {
     @GetMapping("/DoSomething")
     @PreAuthorize("hasAuthority('AddSomeThing')")
     public String getToDo(){
-        return "Teachers/Tea";
+        return "Profile";
+    }
+
+
+    @GetMapping("/my-courses")
+    private String getMyCourses(){
+        return "Teachers/MyCourses";
     }
 }

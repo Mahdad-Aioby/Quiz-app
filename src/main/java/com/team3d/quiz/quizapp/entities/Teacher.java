@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table
-@DiscriminatorValue("TEACHER")
 public class Teacher extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +19,7 @@ public class Teacher extends Person {
 
 
     public Teacher() {
+        super();
     }
 
     @Override

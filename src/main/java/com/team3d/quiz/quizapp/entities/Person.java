@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "PERSON_TYPE", discriminatorType = DiscriminatorType.STRING)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +23,10 @@ public class Person {
     private String type;
 
     public Person() {
+
     }
+
+
 
     public String getType() {
         return type;

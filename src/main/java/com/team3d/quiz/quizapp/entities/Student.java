@@ -8,7 +8,6 @@ import java.util.Set;
 
 @Entity
 @Table
-@DiscriminatorValue("STUDENT")
 public class Student extends Person {
 
     @Id
@@ -26,6 +25,7 @@ public class Student extends Person {
     private Set<Course> courses;
 
     public Student() {
+        super();
     }
 
     @Override

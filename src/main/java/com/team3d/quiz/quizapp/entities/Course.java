@@ -15,10 +15,10 @@ public class Course {
     private Long id;
 
 
-    @ManyToMany(mappedBy = "courses")
+    @ManyToMany(mappedBy = "courses" , cascade = CascadeType.ALL)
     private List<Student> students;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
 
     private Date startDate;

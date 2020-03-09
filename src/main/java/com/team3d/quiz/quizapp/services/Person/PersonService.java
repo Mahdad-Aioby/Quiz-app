@@ -33,20 +33,17 @@ public class PersonService {
             public Predicate toPredicate(Root<Person> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 List<Predicate> predicates = new ArrayList<>();
 
-                // If designation is specified in filter, add equal where clause
                 if (filter.getFirstname() != null) {
                     predicates.add(criteriaBuilder.equal(root.get("firstname"), filter.getFirstname()));
                 }
 
-                // If firstName is specified in filter, add contains (lile)
-                // filter to where clause with ignore case
+
                 if (filter.getNationalcode() != null) {
                     predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("nationalcode")),
                             "%" + filter.getNationalcode().toLowerCase() + "%"));
                 }
 
-                // If lastName is specified in filter, add contains (lile)
-                // filter to where clause with ignore case
+
                 if (filter.getAccount() != null) {
 
 
