@@ -47,4 +47,9 @@ public class MyTeacherServiceImplementation implements MyTeacherService {
         System.out.println("got t id");
         return teacher.get(0).getId();
     }
+
+    @Override
+    public Teacher getTeacherById(Long id) {
+        return teacherRepository.findById(id).get();
+    }
 }

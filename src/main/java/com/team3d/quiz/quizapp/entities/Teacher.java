@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,9 +18,19 @@ public class Teacher extends Person {
     @JsonIgnore
     private Set<Course> courses;
 
+    @OneToMany(mappedBy = "teacher")
+    private List<CourseQuiz> courseQuizs;
 
     public Teacher() {
         super();
+    }
+
+    public List<CourseQuiz> getCourseQuizs() {
+        return courseQuizs;
+    }
+
+    public void setCourseQuizs(List<CourseQuiz> courseQuizs) {
+        this.courseQuizs = courseQuizs;
     }
 
     @Override

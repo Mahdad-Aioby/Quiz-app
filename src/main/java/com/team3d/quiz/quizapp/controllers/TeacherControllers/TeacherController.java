@@ -24,4 +24,9 @@ public class TeacherController {
     private String getMyCourses(){
         return "Teachers/MyCourses";
     }
+
+    @GetMapping("/my-quiz")
+    private String getMyquiz(){
+        return "Teachers/MyQuiz";
+    }
 }

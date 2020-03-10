@@ -279,19 +279,19 @@
 
                 <form>
                     <div class="form-group">
-                        <label for="title" class="col-form-label">نام دوره</label>
+                        <label for="edit-title" class="col-form-label">نام دوره</label>
                         <input type="text" class="form-control" id="edit-title">
                     </div>
                     <div class="form-group">
-                        <label for="desc" class="col-form-label">توضیحات دوره</label>
+                        <label for="edit-desc" class="col-form-label">توضیحات دوره</label>
                         <input type="text" class="form-control" id="edit-desc">
                     </div>
                     <div class="form-group">
-                        <label for="myDate" class="col-form-label">تاریخ شروع</label>
+                        <label for="edit-myDate" class="col-form-label">تاریخ شروع</label>
                         <input type="text" id="edit-myDate" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="myDate2" class="col-form-label">تاریخ پایان</label>
+                        <label for="edit-myDate2" class="col-form-label">تاریخ پایان</label>
                         <input type="text" id="edit-myDate2" class="form-control">
                     </div>
 
@@ -536,7 +536,6 @@
         $("#courseIdForShowCourse").val(globaldata[data].id);
         $("#courseDetails").modal('toggle');
     }
-
     function getCourseByManager() {
         const courseId = $("#courseIdForShowCourse").val();
         $.ajax({
@@ -582,7 +581,6 @@
         }
         $('#student-course-table-body').html(studentContent);
     }
-
     function showEditCourseModal(data) {
         $("#courseIdForEditCourse").val(globaldata[data].id);
         $("#edit-title").val(globaldata[data].courseTitle);

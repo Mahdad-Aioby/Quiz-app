@@ -1,5 +1,6 @@
 package com.team3d.quiz.quizapp.services.Teacher.TeacherHimSelfServices;
 
+import com.team3d.quiz.quizapp.entities.Teacher;
 import com.team3d.quiz.quizapp.entities.dto.ListCourseDTO;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
@@ -12,5 +13,7 @@ public interface MyTeacherService {
     List<ListCourseDTO> showMyCourses(Long teacherId);
 
     Long getCurrentTeacher();
+
+    Teacher getTeacherById( Long id);
 
 }

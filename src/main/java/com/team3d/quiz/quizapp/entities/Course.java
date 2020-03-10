@@ -21,15 +21,24 @@ public class Course {
     @ManyToOne(cascade = CascadeType.ALL)
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "course")
+    private List<CourseQuiz> courseQuizs;
     private Date startDate;
-
     private Date endDate;
-
     private String status;
-
     private String courseTitle;
-
     private String courseDesc;
+
+    public Course() {
+    }
+
+    public List<CourseQuiz> getCourseQuizs() {
+        return courseQuizs;
+    }
+
+    public void setCourseQuizs(List<CourseQuiz> courseQuizs) {
+        this.courseQuizs = courseQuizs;
+    }
 
     public String getCourseTitle() {
         return courseTitle;
@@ -46,10 +55,6 @@ public class Course {
     public void setCourseDesc(String courseDesc) {
         this.courseDesc = courseDesc;
     }
-
-    public Course() {
-    }
-
 
     public Long getId() {
         return id;
