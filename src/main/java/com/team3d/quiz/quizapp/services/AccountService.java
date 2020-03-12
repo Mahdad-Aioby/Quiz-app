@@ -2,7 +2,11 @@ package com.team3d.quiz.quizapp.services;
 
 import com.team3d.quiz.quizapp.entities.*;
 import com.team3d.quiz.quizapp.entities.dto.AccountDTO;
+import com.team3d.quiz.quizapp.entities.dto.SearchDTOForManager;
 import com.team3d.quiz.quizapp.repositories.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,10 +20,13 @@ import java.util.stream.Collectors;
 public class AccountService {
     private AccountRepository accountRepository;
     private RoleService roleService;
+    private AccountSpec accountSpec;
 
-    public AccountService(AccountRepository accountRepository, RoleService roleService) {
+    @Autowired
+    public AccountService(AccountRepository accountRepository, RoleService roleService, AccountSpec accountSpec) {
         this.accountRepository = accountRepository;
         this.roleService = roleService;
+        this.accountSpec = accountSpec;
     }
 
     public Account saveAccount(Account account){
@@ -51,5 +58,14 @@ public class AccountService {
             accountRepository.save(account);
         }
     }
+
+    public List<Account> searchAccount(SearchDTOForManager searchDTOForManager)
+    {
+        accountSpec.setAccount(searchDTOForManager);
+        return accountRepository.findAll(accountSpec);
+    }
+
+
+
 
 }

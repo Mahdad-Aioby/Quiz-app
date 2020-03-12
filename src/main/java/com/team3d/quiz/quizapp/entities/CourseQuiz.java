@@ -1,8 +1,10 @@
 package com.team3d.quiz.quizapp.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.team3d.quiz.quizapp.entities.QuestionEntities.MultiChoiseQuestion;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "quiz")
@@ -24,7 +26,18 @@ public class CourseQuiz {
     @JsonIgnore
     private Teacher teacher;
 
-    public CourseQuiz(String quizTitle,String quizDesc,double quizTime,Course course,Teacher teacher) {
+//    @OneToMany
+//    private List<MultiChoiseQuestion> multiChoiseQuestions;
+//
+//    public List<MultiChoiseQuestion> getMultiChoiseQuestions() {
+//        return multiChoiseQuestions;
+//    }
+//
+//    public void setMultiChoiseQuestions(List<MultiChoiseQuestion> multiChoiseQuestions) {
+//        this.multiChoiseQuestions = multiChoiseQuestions;
+//    }
+
+    public CourseQuiz(String quizTitle, String quizDesc, double quizTime, Course course, Teacher teacher) {
         this.quizTitle = quizTitle;
         this.quizDesc = quizDesc;
         this.quizTime = quizTime;

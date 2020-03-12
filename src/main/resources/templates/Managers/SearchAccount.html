@@ -6,12 +6,17 @@
 </head>
 <body>
     <div>
-        <form method="post" th:action="@{/searchAccount}" th:object="${person}">
+        <form method="post" th:action="@{/searchAccount}" th:object="${search}">
 
-            <input type="text" th:field="*{firstname}"/>
-            <select th:field="*{type}">
-                <option th:value="'Teacher'" th:text="استاد"></option>
-                <option th:value="'Student'" th:text="کاروند"></option>
+            <input type="text" th:field="*{firstName}" placeholder="firstName"/>
+            <input type="text" th:field="*{lastName}" placeholder="lastname"/>
+            <input type="text" th:field="*{username}" placeholder="username"/>
+            <input type="text" th:field="*{phoneNumber}" placeholder="phoneNumber"/>
+            <input type="text" th:field="*{nationalCode}" placeholder="nationalCode"/>
+
+            <select th:field="*{role}">
+                <option th:value="'ROLE_TEACHER'" th:text="استاد"></option>
+                <option th:value="'ROLE_STUDENT'" th:text="کاروند"></option>
             </select>
             <input type="submit" value="search"/>
         </form>
@@ -24,15 +29,26 @@
             <tr>
                 <th>name</th>
                 <th>family</th>
+                <th>username</th>
+                <th>phonenumber</th>
                 <th>nationalcode</th>
+                <th>email</th>
+                <th>role</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="person, peoplestat: *{people}">
+            <tr th:each="searchdtoformanager : *{result}">
 
-                <td th:text="*{people[__${peoplestat.index}__].firstname}"></td>
-                <td th:text="*{people[__${peoplestat.index}__].lastname}"></td>
-                <td th:text="*{people[__${peoplestat.index}__].nationalcode}"></td>
+                <td th:text="*{searchdtoformanager.firstName}"></td>
+                <td th:text="*{searchdtoformanager.lastName}"></td>
+                <td th:text="*{searchdtoformanager.username}"></td>
+                <td th:text="*{searchdtoformanager.phoneNumber}"></td>
+                <td th:text="*{searchdtoformanager.nationalCode}"></td>
+                <td th:text="*{searchdtoformanager.email}"></td>
+                <td th:text="*{searchdtoformanager.role}"></td>
+
+
+
             </tr>
             </tbody>
         </table>
