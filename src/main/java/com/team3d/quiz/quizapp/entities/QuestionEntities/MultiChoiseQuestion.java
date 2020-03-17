@@ -3,10 +3,9 @@ package com.team3d.quiz.quizapp.entities.QuestionEntities;
 import com.team3d.quiz.quizapp.entities.Teacher;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
-//@Entity
-//@Table(name = "MultiChoiseQuestion")
+@Entity
 public class MultiChoiseQuestion {
 
     @Id
@@ -15,12 +14,54 @@ public class MultiChoiseQuestion {
 
     private String question;
 
-    @OneToMany(mappedBy = "multiChoiseQuestion")
-    private Set<Option> options;
+    @ManyToMany(cascade =  CascadeType.ALL)
+    @JoinTable(
+            name = "question_choice",
+            joinColumns = { @JoinColumn(name = "question_id",referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "choice_id",referencedColumnName = "id") }
+    )
+    private List<Choice> choices;
+
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
 
     @OneToOne
     private Teacher teacher;
 
 
+    public MultiChoiseQuestion() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public List<Choice> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(List<Choice> choices) {
+        this.choices = choices;
+    }
+
 
 }
+

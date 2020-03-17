@@ -35,6 +35,14 @@ public class TeacherWorksWithQuizController {
        return quizService.getAllCoursesById(courseid);
     }
 
+    @PostMapping("/get-all-my-quiz")
+    private List<QuizDTOforShow> getAllMyQuiz()
+    {
+
+        List<QuizDTOforShow> quizDTOforShows = quizService.getAllOfMyQuiz();
+        return quizDTOforShows;
+    }
+
     @PostMapping("/Edit")
     private void editQuiz(@RequestBody QuizDTOforShow quizDTOforShow)
     {

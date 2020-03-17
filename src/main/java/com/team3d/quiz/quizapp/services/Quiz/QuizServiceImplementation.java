@@ -1,6 +1,7 @@
 package com.team3d.quiz.quizapp.services.Quiz;
 
 import com.team3d.quiz.quizapp.entities.CourseQuiz;
+import com.team3d.quiz.quizapp.entities.Teacher;
 import com.team3d.quiz.quizapp.entities.dto.QuizDTOForCreate;
 import com.team3d.quiz.quizapp.entities.dto.QuizDTOforShow;
 import com.team3d.quiz.quizapp.repositories.QuizRepository.QuizRepository;
@@ -59,5 +60,17 @@ public class QuizServiceImplementation implements QuizService {
     @Override
     public void delete(Long qid) {
         quizRepository.deleteById(qid);
+    }
+
+    @Override
+    public List<QuizDTOforShow> getAllOfMyQuiz() {
+        Long tid = myTeacherService.getCurrentTeacher();
+        Teacher teacher = myTeacherService.getTeacherById(tid);
+        return quizRepository.findCourseQuizByTeacher(teacher).stream().map(courseQuiz -> new QuizDTOforShow(courseQuiz.getId(),courseQuiz.getQuizTitle(),courseQuiz.getQuizDesc(),courseQuiz.getQuizTime())).collect(Collectors.toList());
+    }
+
+    @Override
+    public CourseQuiz getQuizById(Long id) {
+        return quizRepository.findById(id).get();
     }
 }

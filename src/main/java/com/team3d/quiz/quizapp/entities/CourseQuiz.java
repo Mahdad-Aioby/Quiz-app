@@ -26,16 +26,16 @@ public class CourseQuiz {
     @JsonIgnore
     private Teacher teacher;
 
-//    @OneToMany
-//    private List<MultiChoiseQuestion> multiChoiseQuestions;
-//
-//    public List<MultiChoiseQuestion> getMultiChoiseQuestions() {
-//        return multiChoiseQuestions;
-//    }
-//
-//    public void setMultiChoiseQuestions(List<MultiChoiseQuestion> multiChoiseQuestions) {
-//        this.multiChoiseQuestions = multiChoiseQuestions;
-//    }
+    @OneToMany
+    private List<MultiChoiseQuestion> multiChoiseQuestions;
+
+    public List<MultiChoiseQuestion> getMultiChoiseQuestions() {
+        return multiChoiseQuestions;
+    }
+
+    public void setMultiChoiseQuestions(List<MultiChoiseQuestion> multiChoiseQuestions) {
+        this.multiChoiseQuestions = multiChoiseQuestions;
+    }
 
     public CourseQuiz(String quizTitle, String quizDesc, double quizTime, Course course, Teacher teacher) {
         this.quizTitle = quizTitle;

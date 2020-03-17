@@ -16,4 +16,8 @@ public interface QuizService {
     void update(QuizDTOforShow quizDTOforShow);
 
     void delete(Long qid);
+
+    List<QuizDTOforShow> getAllOfMyQuiz();
+
+    CourseQuiz getQuizById(Long id);
 }

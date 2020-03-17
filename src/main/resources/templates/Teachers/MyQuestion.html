@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="datepicker/css/persianDatepicker-default.css">
+
+
+    <style>
+        .answer{
+            width: 100px!important;
+            float: left;
+            margin-left: 2px;
+            margin-top: 2px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            padding-top: 2px ;
+
+            color: #212121;
+        }
+
+        .answer .remove{
+
+            content: "\00d7";
+            display: block;
+            text-align: center;
+            vertical-align: middle;
+
+        }
+
+        .checked{
+            border: 5px solid #4CAF50;
+        }
+
+        .unchecked{
+            border: 5px solid #d32f2f;
+        }
+
+    </style>
+    <title>My Questions</title>
+</head>
+<body>
+
+<button class="btn btn-outline-primary" onclick="showAddQuestionModal()">Add New Question</button>
+
+
+<!--section add question -->
+
+<div class="modal fade" id="addQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">اضافه کردن سوال</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+                <form>
+                    <div class="form-group">
+                        <label for="question-title" class="col-form-label">متن سوال</label>
+                        <input type="text" class="form-control" id="question-title">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="choice-title" class="col-form-label">جواب</label>
+                        <input type="text" class="form-control" id="choice-title">
+                    </div>
+                    <div class="form-group">
+                        صحیح
+                        <input type="checkbox" name="correctCheck" id="is-correct-title">
+                    </div>
+                    <button type="button" class="btn btn-secondary" onclick="addAnswer()"> افزودن جواب </button>
+                    <div id="answers">
+
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="addQuestionByTeacher()">افزودن</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<!--end section add question-->
+
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+
+
+<script>
+    var correctAnswers = new Array();
+    var incorrectAnswers = new Array();
+
+
+    function showAddQuestionModal() {
+        $("#addQuestion").modal('toggle');
+    }
+
+    function addAnswer() {
+        var answerObj = document.createElement('INPUT');
+        answerObj.setAttribute("type", "text");
+        answerObj.classList.add('answer');
+        var txtValue = document.getElementById('choice-title').value;
+        answerObj.setAttribute("value",txtValue);
+        answerObj.id = txtValue;
+
+        var x=$("#is-correct-title").is(":checked");
+        if(x==true){
+            answerObj.classList.add('checked');
+        }
+        else answerObj.classList.add('unchecked');
+
+
+        answerObj.addEventListener("dblclick",function () {
+            document.getElementById('answers').removeChild(this);
+        });
+        document.getElementById('answers').appendChild(answerObj);
+
+    }
+
+    function packAnswers() {
+
+        var x = document.getElementById('answers').getElementsByTagName('input');
+        var currects;
+        var incorrects;
+        for(i=0 ; i<x.length;++i){
+            currects = document.getElementsByClassName("checked");
+            incorrects = document.getElementsByClassName("unchecked");
+
+        }
+        for(j=0 ; j<currects.length;++j){
+            const answer = currects.item(j).value;
+            correctAnswers.push(answer);
+        }
+        for(k=0 ; k<incorrects.length;++k){
+            var answer = incorrects.item(k).value;
+            incorrectAnswers.push(answer);
+        }
+    }
+
+    function addQuestionByTeacher() {
+        packAnswers();
+        var title = $('#question-title').val();
+        const question={
+            "title" : title,
+            "correct" : correctAnswers,
+            "incorrect" : incorrectAnswers
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/Question/add-question",
+            data: JSON.stringify(question),
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus) {
+
+            },
+            error: function (errorMessage) {
+                alert("some things went wrong!");
+            }
+        });
+        $("#addQuestion").modal('hide');
+    }
+</script>
+</body>
+</html>

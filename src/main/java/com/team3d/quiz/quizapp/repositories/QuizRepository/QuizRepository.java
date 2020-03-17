@@ -3,6 +3,7 @@ package com.team3d.quiz.quizapp.repositories.QuizRepository;
 
 import com.team3d.quiz.quizapp.entities.Course;
 import com.team3d.quiz.quizapp.entities.CourseQuiz;
+import com.team3d.quiz.quizapp.entities.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,4 +24,6 @@ public interface QuizRepository extends JpaRepository<CourseQuiz,Long> {
     void updateQuiz(@Param("title") String title,@Param("description") String desc,@Param("time") double time,@Param("id") Long id);
 
     void deleteById(Long id);
+
+    List<CourseQuiz> findCourseQuizByTeacher(Teacher teacher);
 }
