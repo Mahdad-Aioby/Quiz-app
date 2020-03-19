@@ -35,7 +35,7 @@ public class TeacherController {
     }
 
     @GetMapping("/my-questions")
-    private String getMyQuestionPage(Model model,@RequestParam(name = "cid" ) Long cid){
+    private String getMyQuestionPage(Model model,@RequestParam(name = "cid",required = false) Long cid){
         model.addAttribute("cid",cid);
         return "Teachers/MyQuestion";
     }

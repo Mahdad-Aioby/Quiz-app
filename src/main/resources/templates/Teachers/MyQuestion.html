@@ -92,8 +92,77 @@
 </div>
 </div>
 
-
 <!--end section add question-->
+
+<!-- Section get all questions-->
+<button class="btn btn-outline-primary" onclick="getAllQuestionsByTeacher()">getAll</button>
+
+<table class="table table-striped table-hover" style="padding-top: 10px">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">شرح</th>
+        <th scope="col">گزینه ها</th>
+
+    </tr>
+    </thead>
+    <tbody id="question-table-body">
+
+    </tbody>
+</table>
+
+<!-- end Section get all questions-->
+
+<!--section get questions of a quiz modal-->
+
+<div class="modal fade" id="showQuestionsAnswers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">گزینه ها</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <table class="table table-striped table-hover" style="padding-top: 10px">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">متن</th>
+                        <th scope="col">وضعیت</th>
+                        <th scope="col">ویرایش</th>
+                        <th scope="col">حذف</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="answers-table-body">
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- end section get questions of a quiz modal-->
+
+<!-- end section questions of a quiz modal-->
+
+<!--TODO ویرایش و حذف صورت سوال-->
+
+<!--TODO ویرایش و حذف جواب سوال-->
+
+<!--TODO اضافه کردن جواب جدید به سوال از قبل طراحی شده-->
 
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
@@ -108,7 +177,6 @@
     function showAddQuestionModal() {
         $("#addQuestion").modal('toggle');
     }
-
     function addAnswer() {
         var answerObj = document.createElement('INPUT');
         answerObj.setAttribute("type", "text");
@@ -130,7 +198,6 @@
         document.getElementById('answers').appendChild(answerObj);
 
     }
-
     function packAnswers() {
 
         var x = document.getElementById('answers').getElementsByTagName('input');
@@ -150,7 +217,6 @@
             incorrectAnswers.push(answer);
         }
     }
-
     function addQuestionByTeacher() {
         packAnswers();
         var title = $('#question-title').val();
@@ -177,6 +243,75 @@
         $("#addQuestion").modal('hide');
     }
 
+    function getAllQuestionsByTeacher() {
+        $.ajax({
+            url: "http://localhost:8080/Question/get-Questions-i-created",
+            type: "POST",
+            success: function (data, textStatus, jQxhr) {
+
+                prepareQuestionsTable(data);
+            },
+            error: function (errorMessage) {
+                alert("errorMessage")
+            }
+        });
+    }
+    function prepareQuestionsTable(data) {
+        //console.table(data);
+        let content = '';
+        for (let i = 0; i < data.length; i++) {
+            content += "<tr>";
+            content += "<th scope='row'>" + data[i].id + "</th>";
+            content += "<td >" + data[i].question + "</td>";
+
+            // content +="<td>" +
+            //         "<button type='button' class='btn btn-outline-primary' onclick='showQuestionAnswersModal(" + data[i].choiceDTOS + ")'>show questions</button>" +
+            //         "</td>";
+
+
+            let options = new Array();
+            options = JSON.stringify(data[i].choiceDTOS);
+
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showQuestionAnswersModal("+options+")'>answers</button>" +
+                "</td>";
+            content += "</tr>";
+        }
+
+
+        $('#question-table-body').html(content);
+    }
+
+    function showQuestionAnswersModal(data) {
+
+       prepareChoiceTable(data);
+       $("#showQuestionsAnswers").modal('toggle');
+
+
+    }
+
+
+
+
+    function prepareChoiceTable(data) {
+        let content='';
+        for(let j=0;j<data.length;++j)
+        {
+            content += "<tr>";
+            content += "<td>" + data[j].id + "</td>";
+            content += "<td>" + data[j].title + "</td>";
+            content += "<td>" + data[j].currect + "</td>";
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-danger btn-sm' onclick=''>edit</button>" +
+                "</td>";
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-danger btn-sm' onclick=''>delete</button>" +
+                "</td>";
+            content += "</tr>";
+
+        }
+        $('#answers-table-body').html(content);
+    }
 
 </script>
 </body>

@@ -3,6 +3,9 @@ package com.team3d.quiz.quizapp.services.Question;
 import com.team3d.quiz.quizapp.entities.CourseQuiz;
 import com.team3d.quiz.quizapp.entities.QuestionEntities.Choice;
 import com.team3d.quiz.quizapp.entities.QuestionEntities.MultiChoiseQuestion;
+import com.team3d.quiz.quizapp.entities.Teacher;
+import com.team3d.quiz.quizapp.entities.dto.ChoiceDTO;
+import com.team3d.quiz.quizapp.entities.dto.GetTeachersQuestions;
 import com.team3d.quiz.quizapp.entities.dto.QuestionDTOForAdd;
 import com.team3d.quiz.quizapp.repositories.Question.QuestionRepository;
 import com.team3d.quiz.quizapp.services.Quiz.QuizService;
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceImplementation implements QuestionService{
@@ -53,6 +57,15 @@ public class QuestionServiceImplementation implements QuestionService{
         courseQuiz.setMultiChoiseQuestions(multiChoiseQuestions);
         quizService.update(courseQuiz);
 
+
+    }
+
+    @Override
+    public List<GetTeachersQuestions> QUESTIONS() {
+        Teacher currentTeacher = teacherService.getTeacherById(teacherService.getCurrentTeacher());
+        List<MultiChoiseQuestion> multiChoiseQuestions = questionRepository.findAllByTeacher(currentTeacher);
+
+       return multiChoiseQuestions.stream().map(multiChoiseQuestion -> new GetTeachersQuestions(multiChoiseQuestion.getId(),multiChoiseQuestion.getQuestion(),multiChoiseQuestion.getChoices().stream().map(choice -> new ChoiceDTO(choice.getId(),choice.getTitle(),choice.isCurrect())).collect(Collectors.toList()))).collect(Collectors.toList());
 
     }
 }
