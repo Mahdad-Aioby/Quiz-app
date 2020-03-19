@@ -73,4 +73,9 @@ public class QuizServiceImplementation implements QuizService {
     public CourseQuiz getQuizById(Long id) {
         return quizRepository.findById(id).get();
     }
+
+    @Override
+    public void update(CourseQuiz courseQuiz) {
+        quizRepository.saveAndFlush(courseQuiz);
+    }
 }

@@ -22,4 +22,6 @@ public interface CourseService {
     void update(Course course);
 
     void update(CourseDTO courseDTO);
+
+    //void somethingelse();
 }

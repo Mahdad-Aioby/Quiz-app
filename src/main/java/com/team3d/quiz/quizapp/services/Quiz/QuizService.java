@@ -20,4 +20,6 @@ public interface QuizService {
     List<QuizDTOforShow> getAllOfMyQuiz();
 
     CourseQuiz getQuizById(Long id);
+
+    void update(CourseQuiz courseQuiz);
 }

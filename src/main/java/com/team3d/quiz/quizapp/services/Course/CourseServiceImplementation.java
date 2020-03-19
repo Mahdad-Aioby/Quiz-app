@@ -66,10 +66,8 @@ public class CourseServiceImplementation implements CourseService {
     @Override
     public void update(CourseDTO courseDTO) {
         Course course = courseRepository.getOne(courseDTO.getId());
-
         Date startDate = MyDate.changeFromJalali(courseDTO.getStartDate());
         Date endDate = MyDate.changeFromJalali(courseDTO.getEndDate());
-
         course.setStartDate(startDate);
         course.setEndDate(endDate);
         course.setCourseTitle(courseDTO.getCourseTitle());
@@ -78,4 +76,6 @@ public class CourseServiceImplementation implements CourseService {
         course.setId(courseDTO.getId());
         courseRepository.save(course);
     }
+
+
 }

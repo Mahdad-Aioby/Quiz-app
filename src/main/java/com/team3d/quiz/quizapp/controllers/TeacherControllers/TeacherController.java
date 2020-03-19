@@ -2,7 +2,11 @@ package com.team3d.quiz.quizapp.controllers.TeacherControllers;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ConcurrentModel;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class TeacherController {
@@ -31,7 +35,8 @@ public class TeacherController {
     }
 
     @GetMapping("/my-questions")
-    private String getMyQuestionPage(){
+    private String getMyQuestionPage(Model model,@RequestParam(name = "cid" ) Long cid){
+        model.addAttribute("cid",cid);
         return "Teachers/MyQuestion";
     }
 }

@@ -22,6 +22,7 @@ public class TeacherWorksWithQuestionController {
     @PostMapping("/add-question")
     private void addQuestionByTeacher(@RequestBody QuestionDTOForAdd dtoForAdd)
     {
+        System.out.println("after");
         questionService.addQuestionByTeacher(dtoForAdd);
     }
 }

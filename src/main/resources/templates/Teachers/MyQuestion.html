@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
@@ -43,7 +43,7 @@
 <body>
 
 <button class="btn btn-outline-primary" onclick="showAddQuestionModal()">Add New Question</button>
-
+<input type="text" th:value="${cid}" id="cid-for-add-question">
 
 <!--section add question -->
 
@@ -154,10 +154,13 @@
     function addQuestionByTeacher() {
         packAnswers();
         var title = $('#question-title').val();
+        const courseId = $('#cid-for-add-question').val();
+
         const question={
             "title" : title,
             "correct" : correctAnswers,
-            "incorrect" : incorrectAnswers
+            "incorrect" : incorrectAnswers,
+            "cid" : courseId
         }
         $.ajax({
             type: "POST",
@@ -173,6 +176,8 @@
         });
         $("#addQuestion").modal('hide');
     }
+
+
 </script>
 </body>
 </html>
