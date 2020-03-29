@@ -103,6 +103,9 @@
         <th scope="col">#</th>
         <th scope="col">شرح</th>
         <th scope="col">گزینه ها</th>
+        <th scope="col">ویرایش</th>
+        <th scope="col">حذف</th>
+
 
     </tr>
     </thead>
@@ -112,6 +115,69 @@
 </table>
 
 <!-- end Section get all questions-->
+
+<div class="modal fade" id="editQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ویرایش سوال</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" id="course-edit-question-id" readonly>
+
+                <form>
+                    <div class="form-group">
+                        <label for="edit-question-title" class="col-form-label">سوال</label>
+                        <input type="text" class="form-control" id="edit-question-title">
+                    </div>
+
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" onclick="editQuestion()">save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="editAnswers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">ویرایش سوال</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" id="edit-question-id" readonly>
+
+                <form id="edit-form">
+
+                </form>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-primary" onclick="editQuestion()">save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 
 <!--section get questions of a quiz modal-->
 
@@ -158,11 +224,6 @@
 
 <!-- end section questions of a quiz modal-->
 
-<!--TODO ویرایش و حذف صورت سوال-->
-
-<!--TODO ویرایش و حذف جواب سوال-->
-
-<!--TODO اضافه کردن جواب جدید به سوال از قبل طراحی شده-->
 
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
@@ -172,6 +233,8 @@
 <script>
     var correctAnswers = new Array();
     var incorrectAnswers = new Array();
+
+    var answers = new Array();
 
 
     function showAddQuestionModal() {
@@ -275,11 +338,50 @@
             content += "<td >" +
                 "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showQuestionAnswersModal("+options+")'>answers</button>" +
                 "</td>";
+
+            let bulshit = JSON.stringify(data[i]);
+
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-warning btn-sm' onclick='showEditQuestionModal("+bulshit+")'>edit</button>" +
+                "</td>";
+
+            // content += "<td >" +
+            //     "<button type='button' class='btn btn-outline-danger btn-sm' onclick='showQuestionAnswersModal("+options+")'>answers</button>" +
+            //     "</td>";
             content += "</tr>";
         }
 
 
         $('#question-table-body').html(content);
+    }
+
+    function showEditQuestionModal(data) {
+        $('#course-edit-question-id').val(data.id);
+        $('#edit-question-title').val(data.question);
+        $("#editQuestion").modal('toggle');
+
+    }
+
+    function editQuestion() {
+        const id = $("#course-edit-question-id").val();
+        const title = $("#edit-question-title").val();
+        const question = {
+            "id" : id,
+            "title": title
+        };
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/Question/EditSelf",
+            data: JSON.stringify(question),
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus) {
+
+            },
+            error: function (errorMessage) {
+                alert("some things went wrong!");
+            }
+        });
+        $("#editQuestion").modal('hide');
     }
 
     function showQuestionAnswersModal(data) {
@@ -290,10 +392,8 @@
 
     }
 
-
-
-
     function prepareChoiceTable(data) {
+        answers = data;
         let content='';
         for(let j=0;j<data.length;++j)
         {
@@ -301,17 +401,12 @@
             content += "<td>" + data[j].id + "</td>";
             content += "<td>" + data[j].title + "</td>";
             content += "<td>" + data[j].currect + "</td>";
-            content += "<td >" +
-                "<button type='button' class='btn btn-outline-danger btn-sm' onclick=''>edit</button>" +
-                "</td>";
-            content += "<td >" +
-                "<button type='button' class='btn btn-outline-danger btn-sm' onclick=''>delete</button>" +
-                "</td>";
             content += "</tr>";
-
         }
         $('#answers-table-body').html(content);
     }
+
+
 
 </script>
 </body>

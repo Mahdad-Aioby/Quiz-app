@@ -1,5 +1,6 @@
 package com.team3d.quiz.quizapp.entities.QuestionEntities;
 
+import com.team3d.quiz.quizapp.entities.CourseQuiz;
 import com.team3d.quiz.quizapp.entities.Teacher;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class MultiChoiseQuestion {
             inverseJoinColumns = { @JoinColumn(name = "choice_id",referencedColumnName = "id") }
     )
     private List<Choice> choices;
+
 
 
     public Teacher getTeacher() {

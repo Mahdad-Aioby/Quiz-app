@@ -31,11 +31,92 @@
 </table>
 
 
+<!--section show quiz details modal-->
+
+<div class="modal fade" id="showQuizDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">جزئیات امتحان</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="text" id="my-id">
+               <button onclick="getQuizWithAllDetails()">get datails</button>
+
+
+                <table class="table table-striped table-hover" style="padding-top: 10px">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">متن سوال</th>
+                        <th scope="col">نمره</th>
+                        <th scope="col">عملیات</th>
+
+                    </tr>
+                    </thead>
+                    <tbody id="quiz-details-table-body">
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--section show quiz details modal-->
+
+<!--section enterScore modal-->
+
+<div class="modal fade" id="scoreAQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" id="my-question-id">
+                <input type="hidden" id="my-quiz-id">
+
+                <input type="text" id="score" placeholder="enter score">
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="scoreAQuestionOfQuiz()">ثبت امتیاز</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--end section enterScore modal-->
+
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript" src="js/popper.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.js"></script>
 
 <script>
+
+
+
     function getAllQuizByTeacher() {
         $.ajax({
             url: "http://localhost:8080/Quiz/get-all-my-quiz",
@@ -64,18 +145,95 @@
                 "<button type='button' class='btn btn-outline-warning btn-sm' onclick='sendToQuestionPage(" + data[i].id + ")'>Add Question</button>" +
                 "</td>";
 
-            //
-            // content += "<td >" +
-            //     "<button type='button' class='btn btn-outline-warning btn-sm' onclick='showAllQuizModal(" + data[i].id + ")'>show All Quiz</button>" +
-            //     "</td>";
+
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-warning btn-sm' onclick='showAllQuizDetailsModal(" + data[i].id + ")'>show Details</button>" +
+                "</td>";
             content += "</tr>";
         }
         $('#quiz-table-body').html(content);
     }
-
     function sendToQuestionPage(data) {
 
         loadPage('/my-questions?cid='+data+'');
+
+    }
+    function showAllQuizDetailsModal(data) {
+        $("#my-id").val(data);
+        $("#showQuizDetails").modal('toggle');
+    }
+    function getQuizWithAllDetails() {
+        let id = $("#my-id").val();
+        $.ajax({
+
+            url: "http://localhost:8080/Quiz/get-quiz",
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            data : JSON.stringify(id),
+            success: function (data, textStatus, jQxhr) {
+                    prepareQuizDetailsTable(data);
+
+            },
+            error: function (errorMessage) {
+                alert("errorMessage")
+            }
+        });
+    }
+    function prepareQuizDetailsTable(data) {
+
+        let content = '';
+        for (let i = 0; i < data.length; i++) {
+            content += "<tr>";
+            content += "<th scope='row'>" + data[i].id + "</th>";
+            content += "<td >" + data[i].question + "</td>";
+
+
+            content += "<td >" +
+                "<input type='text' class='mytxts' id='"+data[i].id+"' placeHolder='input score here'>" +
+                "</td>";
+
+
+            content += "<td >" +
+                "<button type='button' class='btn btn-outline-warning btn-sm' onclick='showScoreModal(" + data[i].id + ")'>ثبت امتیاز</button>" +
+                "</td>";
+            content += "</tr>";
+        }
+        $('#quiz-details-table-body').html(content);
+    }
+    function showScoreModal(data) {
+        $("#my-question-id").val(data);
+        $("#my-quiz-id").val($('#my-id').val());
+        $("#scoreAQuestion").modal('toggle');
+
+    }
+
+    function scoreAQuestionOfQuiz() {
+
+        const quiz_id = $("#my-quiz-id").val();
+        const question_id = $("#my-question-id").val();
+        const scoreValue = $("#score").val();
+
+        const Score={
+
+            "questionId" : question_id,
+            "quizId" : quiz_id,
+            "ScoreVal" : scoreValue
+        }
+
+        alert(Score.ScoreVal);
+
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/Question/score-question",
+            data: JSON.stringify(Score),
+            contentType: "application/json; charset=utf-8",
+            success: function (data, textStatus) {
+
+            },
+            error: function (errorMessage) {
+                alert("some things went wrong!");
+            }
+        });
 
     }
 </script>

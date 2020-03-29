@@ -2,19 +2,55 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="css/Manager.css">
+
+    <title>Student Home Page</title>
 </head>
 <body>
 
 
-<a href="/StudentCreateProfile">profile</a>
 
-<div sec:authorize="isAuthenticated()">
-    Authenticated as <span sec:authentication="name"></span>
+<div class="app-container">
+    <div class="app-top-menu">
+        <div sec:authorize="isAuthenticated()" style="float: right;">
+            Authenticated as <span sec:authentication="name"></span></div>
+        <div class="app-brand-box">
+            <div class="app-brand-title">
+                HELP DESK
+            </div>
+        </div>
+    </div>
+    <div class="app-side-bar">
+        <div id="menu" class="menu">بخش کاربران</div>
+        <ul class="menu-ul">
+            <li class="menu-li" onclick="loadPage('/StudentCreateProfile')" >ایجاد پروفایل</li>
+        </ul>
+
+        <div id="courses" class="menu">بخش دوره ها</div>
+        <ul class="menu-ul">
+            <li class="menu-li" onclick="loadPage('/Student/get-my-courses')" >دوره های من</li>
+
+        </ul>
+
+    </div>
+    <div class="app-content" >
+        <div class="app-content-load" id="app-content-load"></div>
+    </div>
+
+</div>
 
 
 
 </div>
+
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="js/popper.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/ManagerHomePage.js"></script>
+
 
 </body>
 </html>

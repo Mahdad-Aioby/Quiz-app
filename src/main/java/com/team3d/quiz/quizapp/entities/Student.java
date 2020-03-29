@@ -15,7 +15,6 @@ public class Student extends Person {
     private Long id;
 
     @ManyToMany
-    @JsonIgnore
     @JoinTable(
             name = "students_courses",
             joinColumns = @JoinColumn(

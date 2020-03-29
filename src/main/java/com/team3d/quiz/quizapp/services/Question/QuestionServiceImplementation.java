@@ -3,8 +3,10 @@ package com.team3d.quiz.quizapp.services.Question;
 import com.team3d.quiz.quizapp.entities.CourseQuiz;
 import com.team3d.quiz.quizapp.entities.QuestionEntities.Choice;
 import com.team3d.quiz.quizapp.entities.QuestionEntities.MultiChoiseQuestion;
+import com.team3d.quiz.quizapp.entities.QuestionEntities.Question;
 import com.team3d.quiz.quizapp.entities.Teacher;
 import com.team3d.quiz.quizapp.entities.dto.ChoiceDTO;
+import com.team3d.quiz.quizapp.entities.dto.EditSelfQuestionDTO;
 import com.team3d.quiz.quizapp.entities.dto.GetTeachersQuestions;
 import com.team3d.quiz.quizapp.entities.dto.QuestionDTOForAdd;
 import com.team3d.quiz.quizapp.repositories.Question.QuestionRepository;
@@ -67,5 +69,15 @@ public class QuestionServiceImplementation implements QuestionService{
 
        return multiChoiseQuestions.stream().map(multiChoiseQuestion -> new GetTeachersQuestions(multiChoiseQuestion.getId(),multiChoiseQuestion.getQuestion(),multiChoiseQuestion.getChoices().stream().map(choice -> new ChoiceDTO(choice.getId(),choice.getTitle(),choice.isCurrect())).collect(Collectors.toList()))).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public void updateQuestionItSelf(EditSelfQuestionDTO editSelfQuestionDTO) {
+        questionRepository.updateQuestion(editSelfQuestionDTO.getTitle(),editSelfQuestionDTO.getId());
+    }
+
+    @Override
+    public MultiChoiseQuestion getQuestionById(Long questionId) {
+        return questionRepository.findById(questionId).get();
     }
 }

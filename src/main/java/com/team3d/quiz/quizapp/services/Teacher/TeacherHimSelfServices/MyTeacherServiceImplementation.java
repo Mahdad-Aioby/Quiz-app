@@ -32,9 +32,11 @@ public class MyTeacherServiceImplementation implements MyTeacherService {
     public List<ListCourseDTO> showMyCourses(Long teacherId) {
         Optional<Teacher> teacher = teacherRepository.findById(teacherId);
         if(teacher.isPresent()){
-           return teacher.get().getCourses().stream().map(course -> new ListCourseDTO(course.getId(),course.getStudents(),course.getTeacher(), MyDate.changeFromGeorgian(course.getStartDate()),MyDate.changeFromGeorgian(course.getEndDate()),course.getStatus(),course.getCourseTitle(),course.getCourseDesc())).collect(Collectors.toList());
+           List<ListCourseDTO> collect = teacher.get().getCourses().stream().map(course -> new ListCourseDTO(course.getId(),course.getStudents(),course.getTeacher(), MyDate.changeFromGeorgian(course.getStartDate()),MyDate.changeFromGeorgian(course.getEndDate()),course.getStatus(),course.getCourseTitle(),course.getCourseDesc())).collect(Collectors.toList());
+           return collect;
 
         }
+
 
         return null;
     }
@@ -44,7 +46,7 @@ public class MyTeacherServiceImplementation implements MyTeacherService {
         String currentUserName = auth.getName();
         Account account = accountService.getAccountByUserName(currentUserName);
         List<Teacher> teacher = teacherRepository.findAll().stream().filter(t->t.getAccount().getId()==account.getId()).collect(Collectors.toList());
-        System.out.println("got t id");
+        //System.out.println("got t id");
         return teacher.get(0).getId();
     }
 

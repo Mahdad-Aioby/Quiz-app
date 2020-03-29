@@ -29,6 +29,7 @@ public class CourseQuiz {
     @OneToMany
     private List<MultiChoiseQuestion> multiChoiseQuestions;
 
+
     public List<MultiChoiseQuestion> getMultiChoiseQuestions() {
         return multiChoiseQuestions;
     }

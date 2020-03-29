@@ -19,6 +19,7 @@ public class Teacher extends Person {
     private Set<Course> courses;
 
     @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<CourseQuiz> courseQuizs;
 
     public Teacher() {

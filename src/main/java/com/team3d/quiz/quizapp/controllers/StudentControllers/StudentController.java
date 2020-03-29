@@ -17,4 +17,9 @@ public class StudentController {
         model.addAttribute("account",principal);
         return "Students/StudentHomePage";
     }
+
+    @GetMapping("/Student/get-my-courses")
+    private String getStudentCourses(){
+        return "Students/MyCourses";
+    }
 }

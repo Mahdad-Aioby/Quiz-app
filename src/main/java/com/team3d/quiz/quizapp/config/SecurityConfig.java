@@ -54,9 +54,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        There is a custom /login page (which is specified by loginPage()),
 //        and everyone is allowed to view it.
 
-        http
+        http.httpBasic().and()
                 .csrf().disable()
-            .authorizeRequests()
+                .authorizeRequests()
                 .antMatchers("/MainPages/**","/signup","/index").permitAll()
                 .antMatchers("/resources/static/**").permitAll()
                 .antMatchers("/*.js","/*.css").permitAll()
