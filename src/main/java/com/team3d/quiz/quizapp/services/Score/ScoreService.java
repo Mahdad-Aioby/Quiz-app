@@ -30,10 +30,10 @@ public class ScoreService {
     public void ScoreQuestion(ScoreDTOforQuestion scoreDTOforQuestion)
     {
 
-//        scoreRepository.save(new Score(Float.parseFloat(scoreDTOforQuestion.getScoreVal()),
-//                                       questionService.getQuestionById(scoreDTOforQuestion.getQuestionId()),
-//                                       quizService.getQuizById(scoreDTOforQuestion.getQuizId())
-//                                       ));
+        scoreRepository.save(new Score(scoreDTOforQuestion.getScoreVal().floatValue(),
+                                       questionService.getQuestionById(scoreDTOforQuestion.getQuestionId()),
+                                       quizService.getQuizById(scoreDTOforQuestion.getQuizId())
+                                       ));
 
     }
 }

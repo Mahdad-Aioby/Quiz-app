@@ -22,4 +22,9 @@ public class StudentController {
     private String getStudentCourses(){
         return "Students/MyCourses";
     }
+
+    @GetMapping("/Student/start-quiz")
+    private String getStartQuiz(){
+        return "Students/StartQuiz";
+    }
 }

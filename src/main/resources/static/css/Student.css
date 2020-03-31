@@ -1,0 +1,16 @@
+
+
+.quiz-info{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border: 1px solid #0f6674;
+}
+
+
+.quiz-container{
+    width: 100%;
+    height: 500px;
+    background-color: #9fcdff;
+    border: 1px solid #007bff;
+}

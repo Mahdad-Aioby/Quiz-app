@@ -50,7 +50,7 @@ public class TeacherWorksWithQuestionController {
 
     @PostMapping("/score-question")
     private void scoreQuestionOfQuiz(@RequestBody ScoreDTOforQuestion scoreDTOforQuestion){
-        System.out.println("after");
+        System.out.println("cock");
         scoreService.ScoreQuestion(scoreDTOforQuestion);
     }
 }

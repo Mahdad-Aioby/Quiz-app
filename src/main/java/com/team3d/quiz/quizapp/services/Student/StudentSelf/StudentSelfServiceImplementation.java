@@ -28,6 +28,7 @@ public class StudentSelfServiceImplementation implements StudentSelfService {
                 .map(course -> new CourseDTOForStudent(course.getId(),course.getCourseTitle(),course.getCourseQuizs()
                         .stream()
                         .map(courseQuiz -> new CourseQuizDTOforStudent(
+                                courseQuiz.getId(),
                                 courseQuiz.getQuizTitle(),
                                 courseQuiz.getQuizDesc(),
                                 courseQuiz.getQuizTime(),

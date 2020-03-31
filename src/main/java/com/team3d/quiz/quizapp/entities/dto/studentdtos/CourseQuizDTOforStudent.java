@@ -6,17 +6,23 @@ import java.util.List;
 
 public class CourseQuizDTOforStudent {
 
+    private Long id;
     private String title;
     private String desc;
     private double time;
 
     private List<QuestionDTOforStudent> questions;
 
-    public CourseQuizDTOforStudent(String title, String desc, double time, List<QuestionDTOforStudent> questions) {
+    public CourseQuizDTOforStudent(Long id,String title, String desc, double time, List<QuestionDTOforStudent> questions) {
+        this.id = id;
         this.title = title;
         this.desc = desc;
         this.time = time;
         this.questions = questions;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getTitle() {
